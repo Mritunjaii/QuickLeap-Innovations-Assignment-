@@ -19,11 +19,15 @@ async function getSubs(req, res) {
 }
 async function createSubs(req, res) {
   try {
+    const startDate = req.body.startDate|| new Date();
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + plan.duration);
     const subscriptionData = {
         userId: req.user.id, 
         plan: req.body.plan,
         status: req.body.status || 'ACTIVE',
-        startDate: req.body.startDate || new Date(),
+        startDate,
+        endDate
     }
     if (!subscriptionData.plan || !subscriptionData.userId) {
       ErrorResponse.error = "Plan and User ID are required";

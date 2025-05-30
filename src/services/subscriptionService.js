@@ -20,6 +20,7 @@ async function getSubs(userId) {
 
 async function createSubs(subscriptionData) {
     try {
+        
         const newSubscription = await SubscriptionRepo.create(subscriptionData);
         return newSubscription;
     } catch (error) {
